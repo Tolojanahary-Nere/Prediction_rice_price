@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  fastapi:
+    build: ./backend/fastapi_app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/fastapi_app:/app
+    depends_on:
+      - mongo
+
+  react:
+    build: ./frontend/rice-dashboard
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/rice-dashboard:/app
+    stdin_open: true
+    tty: true
+
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./db:/data/db
