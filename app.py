@@ -27,6 +27,9 @@ st.markdown("""
         border-radius: 10px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
+    [data-testid="stMetricValue"], [data-testid="stMetricLabel"] {
+        color: black !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
