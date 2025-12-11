@@ -1,0 +1,8 @@
+venv/
+venv_app/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+data/rice_prices_demo.csv # Optional: commit it if we want it to work out of the box on cloud without running generator first? Yes, let's commit it.
+# Actually, let's NOT ignore the csv so it's available for Streamlit Cloud immediately.
