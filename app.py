@@ -4,6 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from src.data_generator import generate_rice_data
 from src.model import RicePriceForecaster
+from datetime import datetime
 import os
 
 # Page Config
@@ -80,7 +81,7 @@ def main():
         fig = px.line(filtered_df, x='date', y='price', color='region', line_dash='type',
                       title="Historique des Prix par Région et Type")
         fig.update_layout(height=500, template="plotly_white")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         
         # Heatmap or Bar Chart
         col_c1, col_c2 = st.columns(2)
@@ -88,12 +89,12 @@ def main():
             st.subheader("Prix Moyen par Région")
             avg_by_region = filtered_df.groupby('region')['price'].mean().reset_index()
             fig_bar = px.bar(avg_by_region, x='region', y='price', color='price', title="Comparaison Régionale")
-            st.plotly_chart(fig_bar, use_container_width=True)
+            st.plotly_chart(fig_bar, width='stretch')
             
         with col_c2:
             st.subheader("Distribution des Prix")
             fig_box = px.box(filtered_df, x='type', y='price', color='type', title="Volatilité par Type")
-            st.plotly_chart(fig_box, use_container_width=True)
+            st.plotly_chart(fig_box, width='stretch')
 
     elif page == "Prévisions IA":
         st.title("🤖 Prévisions Intelligentes")
@@ -117,7 +118,7 @@ def main():
                 fig.add_trace(go.Scatter(x=future_df['date'], y=future_df['predicted_price'], name='Prévision', line=dict(color='red', dash='dash')))
                 
                 fig.update_layout(title=f"Prévision pour {pred_type} à {pred_region}", template="plotly_white")
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
                 
                 st.dataframe(future_df[['date', 'predicted_price', 'rainfall', 'fuel_price']].head())
 
